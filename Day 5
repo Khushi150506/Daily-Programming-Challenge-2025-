@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include<algorithm>
+using namespace std;
+
+void leader(vector<int> arr, vector<int> &vec) {
+    int size = arr.size();
+    int maxFromRight = arr[size - 1];
+
+    vec.push_back(maxFromRight);
+
+    for (int i = size - 2; i >= 0; i--) {
+        if (arr[i] >= maxFromRight) {
+            maxFromRight = arr[i];
+            vec.push_back(arr[i]);
+        }
+    }
+    
+    reverse(vec.begin(), vec.end());
+}
+
+int main() {
+    vector<int> arr = {16, 17, 4, 3, 5, 2};
+    vector<int> vec;
+    leader(arr, vec);
+
+    cout << "Leaders: ";
+    for (int x : vec) {
+        cout << x << " ";
+    }
+    return 0;
+}
