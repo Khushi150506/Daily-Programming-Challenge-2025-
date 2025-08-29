@@ -1,0 +1,29 @@
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+int lengthOfLongestSubstring(string s) {
+    unordered_map<char, int> lastIndex; // store last index of each character
+    int maxLen = 0;
+    int start = 0; // left pointer of window
+
+    for (int end = 0; end < s.length(); end++) {
+        char c = s[end];
+        if (lastIndex.find(c) != lastIndex.end() && lastIndex[c] >= start) {
+            // if character repeats inside current window, move start
+            start = lastIndex[c] + 1;
+        }
+        lastIndex[c] = end; // update last seen index
+        maxLen = max(maxLen, end - start + 1);
+    }
+
+    return maxLen;
+}
+
+int main() {
+    string s;
+    cin >> s;  // input string
+    cout << lengthOfLongestSubstring(s) << endl;
+    return 0;
+}
