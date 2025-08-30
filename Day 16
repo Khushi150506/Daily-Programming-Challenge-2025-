@@ -1,0 +1,14 @@
+#include <iostream>
+#include <numeric>  // for std::gcd
+using namespace std;
+
+int main() {
+    long long N, M;
+    cin >> N >> M;
+
+    long long gcd = std::gcd(N, M);
+    long long lcm = (N / gcd) * M;  // safer to avoid overflow
+
+    cout << lcm << endl;
+    return 0;
+}
